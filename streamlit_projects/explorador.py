@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
+
 
 st.title('Análise de Devedores Qualificados')
 st.write(
@@ -31,8 +31,9 @@ def get_data():
 lista_colunas = ['CNPJ/CPF Base', 'Razão Social', 'Comarca']
 
 data0 = pd.read_csv("dfs/complementar_para_streamlit_01.csv", usecols=lista_colunas)
-data2 = pd.read_csv("dfs/complementar_proin_streamlit_01.csv", usecols=lista_colunas)
-data3 = pd.read_csv("dfs/complementar_proin_CONQUISTA_streamlit_01.csv", usecols=lista_colunas)
+data2 = pd.read_csv("dfs/complementar_para_streamlit_01.csv", usecols=lista_colunas)
+data3 = pd.read_csv("dfs/complementar_para_streamlit_01.csv", usecols=lista_colunas)
+
 
 dados = [data2, data3]
 
@@ -140,45 +141,45 @@ with st.sidebar:
 
 # PERGUNTAS
 
+with st.form(key='questionario'):
+    st.write('### 3) Pontue as razões da sua avaliação')
+    resp_01 = ["Sim", "Não"]
+    st.radio(
+        'Há dificuldade de localização do devedor para citação (de preferência, usar processos mais recentes como referência)?',
+        resp_01)
 
-st.write('### 3) Pontue as razões da sua avaliação')
-resp_01 = ["Sim", "Não"]
-st.radio(
-    'Há dificuldade de localização do devedor para citação (de preferência, usar processos mais recentes como referência)?',
-    resp_01)
+    resp_02 = ["Sim", "Não"]
+    q01 = st.empty()
+    q01.radio('No geral, o devedor apresenta garantia nas execuções (independente do tipo)?', resp_02, 0)
 
-resp_02 = ["Sim", "Não"]
-q01 = st.empty()
-q01.radio('No geral, o devedor apresenta garantia nas execuções (independente do tipo)?', resp_02, 0)
+    resp_03 = ["Sim", "Não"]
+    st.radio(
+        'Caso POSITIVA a resposta anterior, a garantia apresentada nas execuções é boa(dinheiro, fiança ou seguro garantia)?',
+        resp_01)
 
-resp_03 = ["Sim", "Não"]
-st.radio(
-    'Caso POSITIVA a resposta anterior, a garantia apresentada nas execuções é boa(dinheiro, fiança ou seguro garantia)?',
-    resp_01)
+    resp_04 = ["Sim", "Não"]
+    st.radio('Caso negativa a resposta anterior, a garantia apresentada foi aceita?', resp_02)
 
-resp_04 = ["Sim", "Não"]
-st.radio('Caso negativa a resposta anterior, a garantia apresentada foi aceita?', resp_02)
+    resp_05 = ["Sim", "Não"]
+    st.radio('Já houve tentativa de Bacen-Jud em face do devedor?', resp_01)
 
-resp_05 = ["Sim", "Não"]
-st.radio('Já houve tentativa de Bacen-Jud em face do devedor?', resp_01)
+    resp_06 = ["Sim, totalmente",
+               "Sim, parcialmente (acima de 50% do valor do débito)",
+               "Sim, parcialmente (abaixo de 50% do valor do débito)",
+               "Não"]
 
-resp_06 = ["Sim, totalmente",
-           "Sim, parcialmente (acima de 50% do valor do débito)",
-           "Sim, parcialmente (abaixo de 50% do valor do débito)",
-           "Não"]
+    st.radio('Caso Positiva a resposta anterior, a ordem foi frutífera?', resp_06)
 
-st.radio('Caso Positiva a resposta anterior, a ordem foi frutífera?', resp_06)
+    st.write('### 4) Complemente sua avaliação:')
+    st.write('Observações sobre sua avaliação que extrapolam as prguntas acima.')
+    obs = st.text_area("Conclusão da Avaliação:", "Sua observação")
 
-st.write('### 4) Complemente sua avaliação:')
-st.write('Observações sobre sua avaliação que extrapolam as prguntas acima.')
-obs = st.text_area("Conclusão da Avaliação:", "Sua observação")
+    st.write('### 5) Score Final:')
+    st.write(
+        'Atribua um score para sua percepção para a qualificação do devedor, sendo 1 um score muito baixo, e 5 muito alto')
+    score_aderencia = st.slider(label='Socre Aderência:', min_value=0, max_value=5, value=0, step=1, format='%f')
 
-st.write('### 5) Score Final:')
-st.write(
-    'Atribua um score para sua percepção para a qualificação do devedor, sendo 1 um score muito baixo, e 5 muito alto')
-score_aderencia = st.slider(label='Socre Aderência:', min_value=0, max_value=5, value=0, step=1, format='%f')
-
-submeter = st.button("Submeter Avaliação")
-st.markdown("""
-[ver minhas avaliações](#)
-""")
+    submeter = st.form_submit_button("Submeter Avaliação")
+    st.markdown("""
+    [ver minhas avaliações](#)
+    """)
