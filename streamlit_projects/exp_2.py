@@ -3,14 +3,14 @@ import streamlit as st
 import sqlite3
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine, insert, select, and_
-from login_orm import User
+from login_orm import User, UserInput
 
 # Criando DB
 
 
 engine = create_engine('sqlite:///reg_db.sqlite3')
 Session = sessionmaker(bind=engine)
-sess = Session()
+session = Session()
 
 c = engine.connect()
 
@@ -29,7 +29,10 @@ def login_user(username, password):
         and_(User.user_name == username,
              User.user_pass == password))
     data = c.execute(stmt).fetchall()
+
+    #return {"tudo":data, "u":username
     return data
+
 
 def user_sector():
     stmt = select([User])
@@ -37,6 +40,12 @@ def user_sector():
     setor = c.execute(stmt).fetchall()
     for resultado in setor:
         return resultado.user_sector
+
+def active_user():
+    stmt = select([User.id])
+    id_user = c.execute(stmt).fetchall()
+    for ids in id_user:
+        return ids.id
 
 def ver_usuarios():
     usuarios = select([User])
@@ -63,16 +72,27 @@ def main():
             # if password == 'xxx':
 
             result = login_user(username, password)
+            usuario_ativo = result[0][1]
             setor = user_sector()
             st.sidebar.text(setor)
+
+            usess = User(user_name=usuario_ativo)
+            input = UserInput()
+            session.add(usess)
+
+
+
+
             if result and setor=="proin":
                 st.sidebar.success("Logado como {}".format(username))
+                st.text(active_user())
+                st.text(usuario_ativo)
                 task = st.selectbox("Task", ["Profiles"])
 
                 if task == "Profiles":
                     st.subheader('User Profiles')
                     user_result = ver_usuarios()
-                    clean_db = pd.DataFrame(user_result, columns=["user_name", "user_pass", "user_email", "id"])
+                    clean_db = pd.DataFrame(user_result, columns=["user_name", "user_pass", "user_email", "id", "user_sector"])
             else:
                 st.sidebar.warning("Password incorreto.")
 
@@ -84,7 +104,7 @@ def main():
         new_password = st.text_input("Password", type='password')
         new_email = st.text_input("Email")
 
-        setores_pge = ["1", "2", "3", "4"]
+        setores_pge = ["proin", "2", "3", "4"]
         new_sector = st.selectbox("Setor", setores_pge)
 
         if st.button("Criar cadastro"):

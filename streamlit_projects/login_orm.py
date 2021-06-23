@@ -2,6 +2,7 @@ import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy import Column, String, Integer, Float, MetaData, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
 
 Base = declarative_base()
 
@@ -17,6 +18,7 @@ class User(Base):
     user_pass = Column(String)
     user_email = Column(String)
     user_sector = Column(String)
+    inputs = relationship('UserInput', backref="users")
 
 
 class UserInput(Base):
@@ -28,6 +30,7 @@ class UserInput(Base):
     age = Column(Integer)
     location = Column(String)
     id_user = Column(Integer, ForeignKey("users.id"))
+    user = relationship('User')
 
 
 if __name__ == "__main__":
