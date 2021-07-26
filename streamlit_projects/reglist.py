@@ -6,55 +6,6 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine, insert, select, and_
 from login_orm import User, UserInput
 
-# Criando DB
-
-
-engine = create_engine('sqlite:///reg_db.sqlite3')
-Session = sessionmaker(bind=engine)
-session = Session()
-
-c = engine.connect()
-
-
-def add_userdata(username, password, email, setor):
-    data_to_add = insert(User).values(user_name=username,
-                                      user_pass=password,
-                                      user_email=email,
-                                      user_sector=setor)
-    c.execute(data_to_add)
-
-
-def login_user(username, password):
-    stmt = select([User])
-    stmt = stmt.where(
-        and_(User.user_name == username,
-             User.user_pass == password))
-    data = c.execute(stmt).fetchall()
-
-    # return {"tudo":data, "u":username
-    return data
-
-
-def user_sector():
-    stmt = select([User])
-    stmt = stmt.where(User.user_sector == "proin")
-    setor = c.execute(stmt).fetchall()
-    for resultado in setor:
-        return resultado.user_sector
-
-
-def active_user():
-    stmt = select([User.id])
-    id_user = c.execute(stmt).fetchall()
-    for ids in id_user:
-        return ids.id
-
-
-def ver_usuarios():
-    usuarios = select([User])
-    data = c.execute(usuarios).fetchall()
-    return data
-
 
 st.title('Análise de Devedores Qualificados')
 st.write(
@@ -99,8 +50,6 @@ def exposicao_nucelos():
                'PROFIS-NRJ - Núcleo de Representação Judicial']
     opcoes_nucleos = st.selectbox('Informe o(s) núclo(es) do qual faz parte:',
                                   options=nucleos)
-
-
 
     comarcas = df["Comarca"].unique()
     comarcas_proin = df["Comarca"].loc[(df["Comarca"] != "SALVADOR") & \
@@ -238,60 +187,6 @@ with st.sidebar:
 
         [ver minhas avaliações](#)
     """)
-
-def main():
-    st.title("Credenciais de acesso")
-
-    menu = ["Home", "Login", "SignUp"]
-
-    choice = st.sidebar.selectbox("Menu", menu)
-
-    if choice == "Home":
-        st.subheader("Home")
-
-    elif choice == "Login":
-        st.subheader("Login Section")
-        username = st.sidebar.text_input("Seu usuário")
-        password = st.sidebar.text_input("Sua senha", type='password')
-
-        if st.sidebar.button("Login"):
-            # if password == 'xxx':
-
-            result = login_user(username, password)
-            usuario_ativo = result[0][1]
-            setor = user_sector()
-            st.sidebar.text(setor)
-
-            usess = User(user_name=usuario_ativo)
-            input = UserInput()
-            session.add(usess)
-
-            if result and setor == "proin":
-
-                st.sidebar.success("Logado como {}".format(username))
-                st.text(active_user())
-                st.text(usuario_ativo)
-
-                return exposicao_nucelos()#, quest()
-
-            else:
-                st.sidebar.warning("Password incorreto.")
-
-
-
-    elif choice == "SignUp":
-        st.subheader("Create new account")
-        new_user = st.text_input("Username")
-        new_password = st.text_input("Password", type='password')
-        new_email = st.text_input("Email")
-
-        setores_pge = ["proin", "2", "3", "4"]
-        new_sector = st.selectbox("Setor", setores_pge)
-
-        if st.button("Criar cadastro"):
-            add_userdata(new_user, new_password, new_email, new_sector)
-            st.success("Password criado")
-            st.info("Vá para o menu Login")
 
 
 if __name__ == '__main__':

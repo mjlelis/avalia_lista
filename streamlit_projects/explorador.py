@@ -66,52 +66,67 @@ comarcas_proin = df["Comarca"].loc[(df["Comarca"] != "SALVADOR") & \
 
                                    ].unique()
 
+# ANALISTAS PROIN
 
+analistas_proin = ["Adriano Luna Pacheco",
+                   "Verena Nunes Martins",
+                   "Saulo Emanuel Nascimento de Castro",
+                   "Úrsula da Rocha Viegas",
+                   "Saulo Dantas de Santana",
+                   "Thales Francisco Amaral Cabral",
+                   "Filipe Xavier Ribeiro",
+                   "Flávia Almeida Pita",
+                   "Tiago Araújo Costa"
+                   ]
+sua_identidade = st.selectbox('Selecione seu nome:',
+                              options=analistas_proin)
 # st.write('You selected:', opcoes_comarca)
 
-def exposicao_nucelos():
-    if opcoes_nucleos == 'PROIN - Procuradoria do Interior':
+#def exposicao_nucelos():
+if opcoes_nucleos == 'PROIN - Procuradoria do Interior':
 
-        opcoes_comarca = st.selectbox("Selecione sua comarca de atuação",
-                                      options=comarcas_proin)
+    opcoes_comarca = st.selectbox("Selecione sua comarca de atuação",
+                                  options=comarcas_proin)
 
-        st.subheader("1) Dados Candidatos")
-        if st.checkbox("Visalizar lista de candidatos:"):
-            comload = data2.loc[data2['Comarca'] == opcoes_comarca]
-            st.write(comload)
-            st.write(f"{comload['CNPJ/CPF Base'].count()} ocorrências")
+    st.subheader("1) Dados Candidatos")
+    if st.checkbox("Visalizar lista de candidatos:"):
+        comload = data2.loc[data2['Comarca'] == opcoes_comarca]
+        st.write(comload)
+        st.write(f"{comload['CNPJ/CPF Base'].count()} ocorrências")
 
-        st.subheader('2) Selecione quem analisar:')
-        st.write(f"Comarca: {opcoes_comarca}")
+    st.subheader('2) Selecione quem analisar:')
+    st.write(f"Comarca: {opcoes_comarca}")
 
-        comload_proin = data2['Razão Social'].loc[data2['Comarca'] == opcoes_comarca].to_list()
-        # st.write(comload_proin)
-        selecionados_ = st.selectbox('Digite a Razão Social ou CNPJ:', comload_proin)
-        selected_rows = data2.loc[data2["Razão Social"] == selecionados_]
-        st.write('Razão Social Selecionada:', selected_rows)
+    comload_proin = data2['Razão Social'].loc[data2['Comarca'] == opcoes_comarca].to_list()
+    # st.write(comload_proin)
+    selecionados_ = st.selectbox('Digite a Razão Social ou CNPJ:', comload_proin)
+    selected_rows = data2.loc[data2["Razão Social"] == selecionados_]
+    cnpj_base_sel = data2["CNPJ/CPF Base"].loc[(data2["Razão Social"] == selecionados_)]
+    st.write('Razão Social Selecionada:', selected_rows)
 
-    if opcoes_nucleos != 'PROIN - Procuradoria do Interior':
-        comarcas_PROFIS = st.selectbox("Selecione sua comarca de atuação",
-                                       options=comarcas)
+if opcoes_nucleos != 'PROIN - Procuradoria do Interior':
+    comarcas_PROFIS = st.selectbox("Selecione sua comarca de atuação",
+                                   options=comarcas)
 
-        st.subheader("1) Dados Candidatos")
+    st.subheader("1) Dados Candidatos")
 
-        if st.checkbox("Visalizar lista de candidatos:"):
-            candidatos_n_proin = df.loc[df['Comarca'] == comarcas_PROFIS]
-            st.write(candidatos_n_proin)
-            st.write(f"{candidatos_n_proin['CNPJ/CPF Base'].count()} ocorrências")
+    if st.checkbox("Visalizar lista de candidatos:"):
+        candidatos_n_proin = df.loc[df['Comarca'] == comarcas_PROFIS]
+        st.write(candidatos_n_proin)
+        st.write(f"{candidatos_n_proin['CNPJ/CPF Base'].count()} ocorrências")
 
-        st.subheader('2) Selecione quem analisar:')
-        st.write(f"Comarca: {comarcas_PROFIS}")
+    st.subheader('2) Selecione quem analisar:')
+    st.write(f"Comarca: {comarcas_PROFIS}")
 
-        comload_proin = df['Razão Social'].loc[df['Comarca'] == comarcas_PROFIS].to_list()
-        selecionados_ = st.selectbox('Digite a Razão Social ou CNPJ:', comload_proin)
-        selected_rows = df.loc[df["Razão Social"] == selecionados_]
-        st.write('Razão Social Selecionada:', selected_rows)
-        st.write("Dios mio!")
+    comload_proin = df['Razão Social'].loc[df['Comarca'] == comarcas_PROFIS].to_list()
+    selecionados_ = st.selectbox('Digite a Razão Social ou CNPJ:', comload_proin)
+    selected_rows = df.loc[df["Razão Social"] == selecionados_]
+    cnpj_base_sel = df["CNPJ/CPF Base"].loc[df["Razão Social"] == selecionados_]
+    st.write('Razão Social Selecionada:', selected_rows)
+    st.write("Dios mio!")
 
 
-exposicao_nucelos()
+#exposicao_nucelos()
 # if st.checkbox("Ver sumário dos dados"):
 
 
@@ -144,31 +159,32 @@ with st.sidebar:
 with st.form(key='questionario'):
     st.write('### 3) Pontue as razões da sua avaliação')
     resp_01 = ["Sim", "Não"]
-    st.radio(
+    q_01 = st.radio(
         'Há dificuldade de localização do devedor para citação (de preferência, usar processos mais recentes como referência)?',
         resp_01)
 
+
     resp_02 = ["Sim", "Não"]
-    q01 = st.empty()
-    q01.radio('No geral, o devedor apresenta garantia nas execuções (independente do tipo)?', resp_02, 0)
+
+    q_02 = st.radio('No geral, o devedor apresenta garantia nas execuções (independente do tipo)?', resp_02, 0)
 
     resp_03 = ["Sim", "Não"]
-    st.radio(
+    q_03 = st.radio(
         'Caso POSITIVA a resposta anterior, a garantia apresentada nas execuções é boa(dinheiro, fiança ou seguro garantia)?',
         resp_01)
 
     resp_04 = ["Sim", "Não"]
-    st.radio('Caso negativa a resposta anterior, a garantia apresentada foi aceita?', resp_02)
+    q_04 = st.radio('Caso negativa a resposta anterior, a garantia apresentada foi aceita?', resp_02)
 
     resp_05 = ["Sim", "Não"]
-    st.radio('Já houve tentativa de Bacen-Jud em face do devedor?', resp_01)
+    q_05 = st.radio('Já houve tentativa de Bacen-Jud em face do devedor?', resp_01)
 
     resp_06 = ["Sim, totalmente",
                "Sim, parcialmente (acima de 50% do valor do débito)",
                "Sim, parcialmente (abaixo de 50% do valor do débito)",
                "Não"]
 
-    st.radio('Caso Positiva a resposta anterior, a ordem foi frutífera?', resp_06)
+    q_06 = st.radio('Caso Positiva a resposta anterior, a ordem foi frutífera?', resp_06)
 
     st.write('### 4) Complemente sua avaliação:')
     st.write('Observações sobre sua avaliação que extrapolam as prguntas acima.')
@@ -180,6 +196,26 @@ with st.form(key='questionario'):
     score_aderencia = st.slider(label='Socre Aderência:', min_value=0, max_value=5, value=0, step=1, format='%f')
 
     submeter = st.form_submit_button("Submeter Avaliação")
+
+    if submeter:
+        dados_resultados = {
+            'Avaliador':[sua_identidade],
+            'Nucelo': [opcoes_nucleos],
+            'Comarca': [opcoes_comarca],
+            'CNPJ/CPF': [cnpj_base_sel],
+            'Questao 01': [q_01],
+            'Questao 02': [q_02],
+            'Questao 03': [q_03],
+            'Questao 04': [q_04],
+            'Questao 05': [q_05],
+            'Questao 06': [q_06],
+            'score': [score_aderencia],
+            'obss' : [obs]
+        }
+        df_r = pd.DataFrame(dados_resultados)
+        df_r.to_csv('dfs/resultados.csv', mode="a", index=False, header=False)
+
+
     st.markdown("""
     [ver minhas avaliações](#)
     """)

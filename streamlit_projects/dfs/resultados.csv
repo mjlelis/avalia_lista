@@ -1,0 +1,66 @@
+﻿4,Megadeth
+4,este é meu score
+2
+3,"Eu sou mr eliot
+"
+Sim,4,Com modificação
+Não,Não,Sim,Não,Não,"Sim, parcialmente (abaixo de 50% do valor do débito)",5,Primeira Submissão
+PROFIS-NRJ - Núcleo de Representação Judicial,Não,Não,Sim,Não,Não,"Sim, parcialmente (abaixo de 50% do valor do débito)",5,lalalalalalal
+Úrsula da Rocha Viegas,PROIN - Procuradoria do Interior,Sim,Sim,Sim,Sim,Sim,"Sim, totalmente",5,avaliaçao com nome
+Filipe Xavier Ribeiro,PROIN - Procuradoria do Interior,SAO SEBASTIAO DO PASSE,Sim,Sim,Sim,Não,Sim,Não,2,avaliacao de teste
+Filipe Xavier Ribeiro,PROIN - Procuradoria do Interior,SAO SEBASTIAO DO PASSE,"Empty DataFrame
+Columns: [CNPJ/CPF Base, Razão Social, Comarca]
+Index: []",Sim,Sim,Sim,Não,Sim,Não,3,teste ocnpj base
+Filipe Xavier Ribeiro,PROIN - Procuradoria do Interior,SAO SEBASTIAO DO PASSE,"Empty DataFrame
+Columns: [CNPJ/CPF Base, Razão Social, Comarca]
+Index: []",Sim,Sim,Sim,Não,Sim,Não,1,teste ocnpj base XXXX
+Filipe Xavier Ribeiro,PROIN - Procuradoria do Interior,SAO SEBASTIAO DO PASSE,"Empty DataFrame
+Columns: [CNPJ/CPF Base, Razão Social, Comarca]
+Index: []",Sim,Sim,Sim,Não,Sim,Não,5,NOVO teste ocnpj base XXXX
+Filipe Xavier Ribeiro,PROIN - Procuradoria do Interior,SAO SEBASTIAO DO PASSE,"Empty DataFrame
+Columns: [CNPJ/CPF Base, Razão Social, Comarca]
+Index: []",Sim,Sim,Não,Não,Sim,"Sim, parcialmente (acima de 50% do valor do débito)",1,AGORA é um NOVO
+Filipe Xavier Ribeiro,PROIN - Procuradoria do Interior,SAO SEBASTIAO DO PASSE,"Empty DataFrame
+Columns: [CNPJ/CPF Base, Razão Social, Comarca]
+Index: []",Sim,Sim,Não,Não,Sim,"Sim, parcialmente (acima de 50% do valor do débito)",2,AGORA é um NOVO NONOVNONVONOV
+Filipe Xavier Ribeiro,PROIN - Procuradoria do Interior,SAO SEBASTIAO DO PASSE,"101     16180770.0
+103     16180770.0
+108     16180770.0
+695     16180770.0
+705     16180770.0
+707     16180770.0
+713     16180770.0
+1269    16180770.0
+1280    16180770.0
+1927    16180770.0
+1946    16180770.0
+1947    16180770.0
+1948    16180770.0
+1949    16180770.0
+2562    16180770.0
+2563    16180770.0
+2565    16180770.0
+2569    16180770.0
+3198    16180770.0
+3211    16180770.0
+3226    16180770.0
+Name: CNPJ/CPF Base, dtype: float64",Sim,Não,Não,Não,Sim,"Sim, parcialmente (acima de 50% do valor do débito)",1,lalalala  NOVO NONOVNONVONOV
+Adriano Luna Pacheco,PROIN - Procuradoria do Interior,FEIRA DE SANTANA,"Series([], Name: CNPJ/CPF Base, dtype: float64)",Sim,Sim,Sim,Sim,Sim,"Sim, totalmente",2,Agora com o elemento
+Adriano Luna Pacheco,PROIN - Procuradoria do Interior,FEIRA DE SANTANA,"Series([], Name: CNPJ/CPF Base, dtype: float64)",Sim,Sim,Sim,Sim,Sim,"Sim, totalmente",2,Agora com o elemento
+Adriano Luna Pacheco,PROIN - Procuradoria do Interior,FEIRA DE SANTANA,"87      7098400.0
+2081    7098400.0
+Name: CNPJ/CPF Base, dtype: float64",Sim,Sim,Sim,Sim,Sim,"Sim, totalmente",1,O numero 1
+Adriano Luna Pacheco,PROIN - Procuradoria do Interior,FEIRA DE SANTANA,"Series([], Name: CNPJ/CPF Base, dtype: float64)",Sim,Sim,Sim,Sim,Sim,"Sim, totalmente",1,O numero 2
+Adriano Luna Pacheco,PROIN - Procuradoria do Interior,FEIRA DE SANTANA,"Series([], Name: CNPJ/CPF Base, dtype: float64)",Sim,Sim,Sim,Sim,Sim,"Sim, totalmente",1,Sua observaçãob lblalbl 
+Adriano Luna Pacheco,PROIN - Procuradoria do Interior,FEIRA DE SANTANA,"Series([], Name: CNPJ/CPF Base, dtype: float64)",Sim,Sim,Sim,Sim,Sim,"Sim, totalmente",2,e agora?
+Adriano Luna Pacheco,PROIN - Procuradoria do Interior,FEIRA DE SANTANA,"87      7098400.0
+2081    7098400.0
+Name: CNPJ/CPF Base, dtype: float64",Sim,Sim,Sim,Sim,Sim,"Sim, totalmente",4,e agora? uhduhwedhwdwd
+Adriano Luna Pacheco,PROIN - Procuradoria do Interior,EUCLIDES DA CUNHA,"779     5005530.0
+780     5005530.0
+784     5005530.0
+1991    5005530.0
+2008    5005530.0
+2040    5005530.0
+2062    5005530.0
+Name: CNPJ/CPF Base, dtype: float64",Sim,Sim,Sim,Não,Sim,"Sim, parcialmente (abaixo de 50% do valor do débito)",5,qualical
